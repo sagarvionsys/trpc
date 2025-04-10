@@ -36,6 +36,7 @@ export function TRPCProvider(
   }>
 ) {
   const queryClient = getQueryClient();
+
   const [trpcClient] = useState(() =>
     trpc.createClient({
       links: [

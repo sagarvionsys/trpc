@@ -6,6 +6,7 @@ import { trpc } from "@/trpc/client";
 export default function Home() {
   const [newUserName, setNewUserName] = useState("");
   const utils = trpc.useUtils();
+  console.log("hello");
 
   const { data, isLoading } = trpc.users.getById.useQuery({ id: 2 });
 
@@ -14,7 +15,7 @@ export default function Home() {
 
   const { mutate, isPending } = trpc.users.createUser.useMutation({
     onSuccess: () => utils.users.getAll.invalidate(),
-    onError: () => console.log("Error adding user"),
+    onError: (err) => console.log(err.message),
   });
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
